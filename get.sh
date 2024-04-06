@@ -4,7 +4,7 @@ export PATH
 
 #=================================================
 #	System Required: Linux
-#	Description: Backrest Install and Update Helper
+#	Description: Backrest Helper
 #	Author: Nebulosa Cat
 #	WebSite: https://nebulosa-cat.moe
 #=================================================
@@ -22,13 +22,13 @@ sysArch() {
     uname=$(uname -m)
     if [[ "$uname" == "x86_64" ]]; then
         arch="x86_64"
-    elif [[ "$uname" == *"armv7"* ]] || [[ "$uname" == "armv6l" ]]; then
+        elif [[ "$uname" == *"armv7"* ]] || [[ "$uname" == "armv6l" ]]; then
         arch="armv6"
-    elif [[ "$uname" == *"armv8"* ]] || [[ "$uname" == "aarch64" ]]; then
+        elif [[ "$uname" == *"armv8"* ]] || [[ "$uname" == "aarch64" ]]; then
         arch="arm64"
-    else 
-      echo "${Error} Not Support Kernal" && exit 1      
-    fi    
+    else
+        echo "${Error} Not Support Kernal" && exit 1
+    fi
 }
 
 Install() {
@@ -85,65 +85,64 @@ Stoper(){
     sudo systemctl stop backrest
 }
 
-Reload(){
-    sudo systemctl reload backrest
-}
-
 Status(){
     sudo systemctl status backrest
 }
 
 Start_Menu(){
     clear
-    echo -e "  
-==============================
-Backrest Install Helper
-==============================
- ${Green_font_prefix} 0.${Font_color_suffix} Download and Install Backrest
+    echo -e "
+=============================================
+           Backrest Install Helper
+=============================================
+ ${Red_font_prefix} Warring: This Script Only Work On Linux !${Font_color_suffix}
+————————————————————————————————-------------
+ ${Green_font_prefix} 0.${Font_color_suffix} Install / Update Backrest
  ${Green_font_prefix} 1.${Font_color_suffix} Uninstall Backrest
-——————————————————————————————
+—————————————————————————————————------------
  ${Green_font_prefix} 2.${Font_color_suffix} Start Backrest
  ${Green_font_prefix} 3.${Font_color_suffix} Stop Backrest
-——————————————————————————————
+—————————————————————————————————------------
  ${Green_font_prefix} 4.${Font_color_suffix} Show Backrest Status
------------------------------- 
+---------------------------------------------
  ${Green_font_prefix} 9.${Font_color_suffix} Exit Script
-=============================="
-read -e -p " Please Input [0-9]:" num
-	case "$num" in
-		0)
-		Install
-		;;
-		1)
-		uninstall
-		;;
-		2)
-		Start
-		;;
-		3)
-		Stoper
-		;;
-		4)
-		Status
-		;;
-		5)
-		exit 1
-		;;
-		6)
-		exit 1
-		;;
-		7)
-		exit 1
-		;;
-		8)
-		exit 1
-		;;
-		9)
-		exit 1
-		;;
-		*)
-		echo "Pleas input correct number ${Yellow_font_prefix}[0-9]${Font_color_suffix}"
-		;;
-	esac
+=============================================
+"
+    read -e -p " Please Input [0-9]:" num
+    case "$num" in
+        0)
+            Install
+        ;;
+        1)
+            Uninstall
+        ;;
+        2)
+            Start
+        ;;
+        3)
+            Stoper
+        ;;
+        4)
+            Status
+        ;;
+        5)
+            exit 1
+        ;;
+        6)
+            exit 1
+        ;;
+        7)
+            exit 1
+        ;;
+        8)
+            exit 1
+        ;;
+        9)
+            exit 1
+        ;;
+        *)
+            echo "Please input correct number ${Yellow_font_prefix}[0-9]${Font_color_suffix}"
+        ;;
+    esac
 }
 Start_Menu
